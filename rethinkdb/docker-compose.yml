@@ -1,0 +1,28 @@
+version: '2'
+services:
+  notebook:
+    image: "jupyter/scipy-notebook"
+    ports:
+      - "8888:8888"
+    volumes:
+      - ..:/home/jovyan/bdge
+    user: root
+    environment:
+      - GRANT_SUDO=yes
+    command: start-notebook.sh --NotebookApp.token=''
+    depends_on:
+      - rethinkdb
+
+  rethinkdb:
+    image: rethinkdb
+    ports:
+      - "8080:8080"
+      - "28015:28015"
+      - "29015:29015"
+    volumes:
+      - ..:/home/jovyan/bdge
+
+
+
+    
+
